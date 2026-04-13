@@ -1,0 +1,212 @@
+crashcourse_physics_topic:
+  type: web
+  title: Physics
+  organization: Crash Course
+  url:
+    value: https://thecrashcourse.com/topic/physics/
+    date: 2026-04-13
+
+crashcourse_physics_playlist:
+  type: video
+  title: Crash Course Physics (YouTube Playlist)
+  organization: YouTube
+  url:
+    value: https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV
+    date: 2026-04-13
+  parent:
+    type: web
+    title: Physics
+    organization: Crash Course
+
+crashcourse_motion:
+  type: web
+  title: "Motion in a Straight Line: Crash Course Physics #1"
+  organization: Crash Course
+  url:
+    value: https://thecrashcourse.com/courses/motion-in-a-straight-line-crash-course-physics-1/
+    date: 2026-04-13
+  parent:
+    type: web
+    title: Physics
+    organization: Crash Course
+
+yt_motion_video:
+  type: video
+  title: "Motion in a Straight Line: Crash Course Physics #1 (Video)"
+  organization: YouTube
+  url:
+    value: https://www.youtube.com/watch?v=ZM8ECpBuQYE
+    date: 2026-04-13
+  parent:
+    - type: video
+      title: Crash Course Physics (YouTube Playlist)
+      organization: YouTube
+    - type: web
+      title: "Motion in a Straight Line: Crash Course Physics #1"
+      organization: Crash Course
+
+crashcourse_derivatives:
+  type: web
+  title: "Derivatives: Crash Course Physics #2"
+  organization: Crash Course
+  url:
+    value: https://thecrashcourse.com/courses/derivatives-crash-course-physics-2/
+    date: 2026-04-13
+  parent:
+    type: web
+    title: Physics
+    organization: Crash Course
+
+yt_derivatives_video:
+  type: video
+  title: "Derivatives: Crash Course Physics #2 (Video)"
+  organization: YouTube
+  url:
+    value: https://www.youtube.com/watch?v=ObHJJYvu3RE
+    date: 2026-04-13
+  parent:
+    - type: video
+      title: Crash Course Physics (YouTube Playlist)
+      organization: YouTube
+    - type: web
+      title: "Derivatives: Crash Course Physics #2"
+      organization: Crash Course
+
+crashcourse_integrals:
+  type: web
+  title: "Integrals: Crash Course Physics #3"
+  organization: Crash Course
+  url:
+    value: https://thecrashcourse.com/courses/integrals-crash-course-physics-3/
+    date: 2026-04-13
+  parent:
+    type: web
+    title: Physics
+    organization: Crash Course
+
+yt_integrals_video:
+  type: video
+  title: "Integrals: Crash Course Physics #3 (Video)"
+  organization: YouTube
+  url:
+    value: https://www.youtube.com/watch?v=ObHJJYvu3RE
+    date: 2026-04-13
+  parent:
+    - type: video
+      title: Crash Course Physics (YouTube Playlist)
+      organization: YouTube
+    - type: web
+      title: "Integrals: Crash Course Physics #3"
+      organization: Crash Course
+
+crashcourse_gravity:
+  type: web
+  title: "Newtonian Gravity: Crash Course Physics #8"
+  organization: Crash Course
+  url:
+    value: https://thecrashcourse.com/courses/newtonian-gravity-crash-course-physics-8/
+    date: 2026-04-13
+  parent:
+    type: web
+    title: Physics
+    organization: Crash Course
+
+yt_gravity_video:
+  type: video
+  title: "Newtonian Gravity: Crash Course Physics #8 (Video)"
+  organization: YouTube
+  url:
+    value: https://www.youtube.com/watch?v=7gf6YpdvtE0
+    date: 2026-04-13
+  parent:
+    - type: video
+      title: Crash Course Physics (YouTube Playlist)
+      organization: YouTube
+    - type: web
+      title: "Newtonian Gravity: Crash Course Physics #8"
+      organization: Crash Course
+
+wikipedia_main:
+  type: web
+  title: Wikipedia, the Free Encyclopedia
+  organization: Wikimedia Foundation
+  url:
+    value: https://en.wikipedia.org/wiki/Main_Page
+    date: 2026-04-13
+
+wikipedia_velocity:
+  type: web
+  title: Velocity
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Velocity
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_acceleration:
+  type: web
+  title: Acceleration
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Acceleration
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_newton_laws:
+  type: web
+  title: "Newton's Laws of Motion"
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_gravitation:
+  type: web
+  title: "Newton's Law of Universal Gravitation"
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_gravitational_constant:
+  type: web
+  title: Gravitational Constant
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Gravitational_constant
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_earth_radius:
+  type: web
+  title: Earth Radius
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Earth_radius
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
+
+wikipedia_nbody:
+  type: web
+  title: N-body Problem
+  organization: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/N-body_problem
+    date: 2026-04-13
+  parent:
+    type: reference
+    title: Wikipedia
