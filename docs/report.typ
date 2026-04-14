@@ -28,48 +28,57 @@ speed and velocity are normally represented as the magnitude and direction — i
 Portuguese _sentido_, since _direção_ alone doesn't let us represent the
 inverse of a vector — of a vector respectively.
 
-Given a constant velocity (no acceleration) $v$, $r = r_0 + v Delta
-t$#footnote[@yt_motion_video], $r_0$ being the initial position, $Delta t$
-being the time passed, so $r$ is the position when the object moves with that
-velocity $v$ for $t$ units of time.
+Given a constant velocity (no acceleration) $v$, and $Delta t$ being the time
+passed, starting at $t_0$ and ending at $t_f$, $r(Delta t) = r(t_0) + v
+t_f$#footnote[@yt_motion_video], so $r$ is the position when the object moves
+with that velocity $v$ for $t$ units of time starting at position $r(t_0)$.
 
-Because $r$ varies over time, we can say that there is the function $r(t)$.
-
-The average velocity is $macron(v) = frac(Delta r, Delta
-  t)$.#footnote[@wikipedia_velocity] When we close that time window to a
+The average velocity is $macron(v) = frac(
+  Delta r, Delta
+  t
+)$.#footnote[@wikipedia_velocity] When we close that time window to a
 certain point of time, we tend to get the velocity at that point of
 time.#footnote[@yt_derivatives_video] The velocity at given time $t$
 (instantaneous velocity) is represented as:
 
-$ v(t) &= lim_(Delta t -> 0) frac(Delta r, Delta t) = \
-    &= lim_(Delta t -> 0) frac(r(t + Delta t) - r(t), Delta t) = \
-    &= frac(d r, d t) = r'(t) $
+$
+  v(t) & = lim_(Delta t -> 0) frac(Delta r, Delta t) = \
+       & = lim_(Delta t -> 0) frac(r(t + Delta t) - r(t), Delta t) = \
+       & = frac(d r, d t) = r'(t)
+$
 
 Velocity changes position over time, and acceleration changes velocity over
 time.
 
 So something similar happens to calculate the acceleration $a$:
 
-$ a(t) &= lim_(Delta t -> 0) frac(Delta v, Delta t) = \
-    &= frac(d v, d t) = v'(t) = \
-    &= frac(d^2 r, d t^2) = r''(t) $
+$
+  a(t) & = lim_(Delta t -> 0) frac(Delta v, Delta t) = \
+       & = frac(d v, d t) = v'(t) = \
+       & = frac(d^2 r, d t^2) = r''(t)
+$
 
 Because we don't like in a unidimensional world, $v$ and $a$ are represented
 in vectors:
 
-$ arrow(a) = frac(Delta arrow(v), t) &<=> arrow(a) t = Delta arrow(v) <=> \
-    &<=> arrow(v) = arrow(v_0) + arrow(a) t $
+$
+  arrow(a) = frac(Delta arrow(v), t) & <=> arrow(a) t = Delta arrow(v) <=> \
+                                     & <=> arrow(v) = arrow(v_0) + arrow(a) t
+$
 
 We can also use integrals to arrive to some common
 equations:#footnote[@yt_integrals_video]
 
-$ arrow(Delta r) &= integral^t_t_0 arrow(v) d t = \
-    &= arrow(v_0) t + frac(Delta arrow(v) t, 2) = \
-    &= arrow(v_0) t + frac(arrow(a) t^2, 2) $
+$
+  arrow(Delta r) & = integral^t_t_0 arrow(v) d t = \
+                 & = arrow(v_0) t + frac(Delta arrow(v) t, 2) = \
+                 & = arrow(v_0) t + frac(arrow(a) t^2, 2)
+$
 
-And from that, we arrive to the kinematic
-equation#footnote[@crashcourse_motion] $r &= r_0 + arrow(v_0) t + frac(1, 2)
-arrow(a) t^2$.
+That was assuming the acceleration is constant. From that, we arrive to the
+kinematic equation#footnote[@crashcourse_motion]
+
+$ r & = r_0 + arrow(v_0) t + frac(1, 2) arrow(a) t^2 $
 
 === For Later
 
@@ -88,6 +97,22 @@ $ v(t + Delta t) = v(t) + a(t) Delta t $
 
 On the project statement, the teacher suggests a _half-step_ and finally a
 correction. I still have to figure out why exactly, but the logic is the same.
+
+== Newton's Laws of Motion
+
++ For the velocity of an object to change, there must be a force acting upon
+  it;
++ The linear momentum $arrow(p) = m arrow(v)$ of the object will change
+  depending on that force applied. All the forces acting upon the object at the
+  moment, together, equal how much the linear momentum is changing at that time.
+
+  That is, assuming mass doesn't change over time:
+
+  $ arrow(F) = m v'(t) = m arrow(a) $
++ If you hit a wall, the wall hits you back with equal force (and that's why it
+  hurts).
+
+  So for any force, there's an equal one but with inverse _sentido_.
 
 == Newton's Law of Universal Gravitation
 
@@ -134,23 +159,27 @@ As Newton figured out, pretty tiny. So the formula becomes:
 $ arrow(F_"gravity") = G frac(m_a m_b, norm(arrow(a) - arrow(b))^2) $
 
 Look how cool is this. If you are free-falling, the force of gravity acting on
-you, based on the second law of motion#footnote[@wikipedia_newton_laws], is:
+you, based on the second law of motion, is:
 
 $ arrow(F_"gravity") = m arrow(g) $
 
 We are taught that the acceleration of Earths gravity is close to
 $norm(arrow(g)) = 9.8 m"/"s^2$. Now look:#footnote[@yt_gravity_video]
 
-$ frac(arrow(F_"gravity"), m_"you") &= G frac(m_"Earth", norm(arrow(a) - arrow(b))^2) = \
-    &= arrow(g) = \
-    &= vec(9.8) $
+$
+  frac(arrow(F_"gravity"), m_"you") &= G frac(m_"Earth", norm(arrow(a) - arrow(b))^2) = \
+  &= arrow(g) = \
+  &= vec(9.8)
+$
 
 $norm(arrow(a) - arrow(b))$ is the radius of the
 Earth#footnote[@wikipedia_earth_radius] (I guess the Earth isn't a sphere, but
 you get the point), so:
 
-$ G frac(m_"Earth", 6371008.7714^2) = 9.8 &<=> m_"Earth" = 9.8 frac(6371008.7714^2, G) <=> \
-    &<=> m_"Earth" = 5.9598683 times 10^24 "kg" $
+$
+  G frac(m_"Earth", 6371008.7714^2) = 9.8 &<=> m_"Earth" = 9.8 frac(6371008.7714^2, G) <=> \
+  &<=> m_"Earth" = 5.9598683 times 10^24 "kg"
+$
 
 I believe I did the maths right, and as you can see, the Earth is... heavy.
 
@@ -169,4 +198,4 @@ I believe I did the maths right, and as you can see, the Earth is... heavy.
 
 #pagebreak()
 
-#bibliography("bibliography.yaml", style: "american-physics-society")
+#bibliography("bibliography.yaml")
