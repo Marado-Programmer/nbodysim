@@ -129,7 +129,7 @@ my head this last year's I had physics in school.
 
 That gives the following:
 
-$ F_"gravity" prop frac(m_a m_b, norm(arrow(a) - arrow(b))^2) $
+$ F_"gravity" prop frac(m_a m_b, norm(arrow(r_a) - arrow(r_b))^2) $
 
 With empiricism, Newton figured out that the bigger the masses of the objects,
 the stronger the force; and the further apart the objects are from each other,
@@ -148,18 +148,23 @@ Probably the Sun, for example. Yeah, probably, but don't forget that we are
 touching the Earth, and *the Sun is probably an astronomical unit away*, and
 that the distance between the objects also count.
 
-Because of all of the above, Newton added to the equation a constant $G$ which
+Because of all the above, Newton added to the equation a constant $G$ which
 represents just a very little and tiny number that would make those force
 calculation results seem more realistic. $G$ initially didn't have a specific
 value attributed to it by Newton. Later scientists figured out that a good
 number for it is $G = 6.6743015 times 10^(−11) "m"^3 "kg"^(−1)
 "s"^(−2)$.#footnote[@yt_gravity_video]#footnote[@wikipedia_gravitational_constant]
-As Newton figured out, pretty tiny. So the formula becomes:
+As Newton figured out, pretty tiny. If we say $arrow(Delta r_"ab")$ is the
+distance from object $a$ to object $b$, the formula becomes:
 
-$ arrow(F_"gravity") = G frac(m_a m_b, norm(arrow(a) - arrow(b))^2) $
+$
+  arrow(F_"gravity") = G frac(m_a m_b, norm(arrow(Delta r))^2) frac(arrow(Delta r), norm(arrow(Delta r)))
+$
 
-Look how cool is this. If you are free-falling, the force of gravity acting on
-you, based on the second law of motion, is:
+We get a force vector. We can also notice that the gravitational force from $b$
+to $a$ is equal to that from $a$ to $b$, but just the inverse vector (the third
+law of motion). Look, how cool is this! If you are free-falling, the force of
+gravity acting on you, based on the second law of motion, is:
 
 $ arrow(F_"gravity") = m arrow(g) $
 
@@ -167,9 +172,9 @@ We are taught that the acceleration of Earths gravity is close to
 $norm(arrow(g)) = 9.8 m"/"s^2$. Now look:#footnote[@yt_gravity_video]
 
 $
-  frac(arrow(F_"gravity"), m_"you") &= G frac(m_"Earth", norm(arrow(a) - arrow(b))^2) = \
-  &= arrow(g) = \
-  &= vec(9.8)
+  frac(F_"gravity", m_"you") & = G frac(m_"Earth", norm(arrow(a) - arrow(b))^2) = \
+                             & = g = \
+                             & = 9.8
 $
 
 $norm(arrow(a) - arrow(b))$ is the radius of the
@@ -186,9 +191,76 @@ I believe I did the maths right, and as you can see, the Earth is... heavy.
 = $n$-Body Problem
 
 #quote(attribution: [@wikipedia_gravitation])[
-  The problem of predicting the motion of n objects subject to gravity is known
-  as the n-body problem.
+  The problem of predicting the motion of $n$ objects subject to gravity is
+  known as the $n$-body problem.
 ]
+
+The problem itself isn't hard to understand, nor to implement. You obviously
+just calculate all of the accelerations to then apply to each object given
+$Delta t$.
+
+The problem then comes when the number of objects grow, because a calculation
+for the acceleration of an object depends on all other objects. Time complexity
+$n(n-1) = Omicron(n^2)$, which doesn't look that crazy.
+
+Literally, like it's shown in the project statement:
+
+$
+  arrow(a_i) &= frac(arrow(F_i), m_i) = \
+  &= frac(1, m_i) sum_(j = 0, j eq.not i)^n arrow(F_(i j)) = \
+  &= frac(G m_i, m_i) sum_(j = 0, j eq.not i)^n frac(m_j arrow(Delta r), norm(arrow(Delta r))^3) = \
+  &= G sum_(j = 0, j eq.not i)^n frac(m_j arrow(Delta r), norm(arrow(Delta r))^3)
+$
+
+The project statement actually introduces another variable, $epsilon$, which
+prevents from dividing by zero in case the two objects are in the exact same
+position. I guess that's not even possible in real life since there's flesh
+around my centre of gravity that prevents us from being in the same position, I
+guess that's unless something is part of me. To mimic real life, Each of the
+objects for the simulation will get a "_radius_" greater than zero,
+representing the "flesh", the collision box. This will serve exactly like the
+_softening parameter_ $epsilon$:
+
+$
+  because "radius"_a > 0 and "radius"_b > 0 \
+  epsilon colon.eq "radius"_a + "radius"_b \
+  therefore epsilon > 0 \
+  therefore forall x in RR, norm(arrow(Delta r))^3 + epsilon > 0 \
+  therefore forall x in RR, norm(arrow(Delta r))^3 + epsilon eq.not 0
+$
+
+Division by zero won't happen this way: $epsilon > 0 => forall x in RR,
+norm(arrow(Delta r))^3 + epsilon eq.not 0$.
+
+Later, this idea of collisions can later serve the purpose to actually
+physically simulate them so that it becomes impossible for two or more objects
+to be "on top" of each other.
+
+But now, where in the formula of acceleration would I put this? I think I just
+don't put it, and collisions should be taken care of programmatically and not
+with maths.
+
+I might have just not understood fully how $epsilon$ integrates on the formula,
+because, why are we doing the Euclidean distance between $norm(Delta r)$ and
+$epsilon$, to the power of 3, to substitute $norm(Delta r)$ alone, and what's
+the logic behind it? Are there other solutions for the obvious problem? And
+also, is there an optimal value for $epsilon$ then? I really don't get it.
+
+I got it that we need it to "remove the singularity at small
+distances"#footnote[@wikipedia_nbody], but that's it. And by talking about
+optimal values for $epsilon$, I haven't even thought about the values for the
+other parameters. Maybe I'll just consider $G = 1$ to simplify things, as I
+don't think I'll be simulating the cosmos.
+
+What a _dilemma_!
+
+== The singularity dilemma
+
+#h(3fr)
+#sym.dash.em.three
+*#sym.convolve #h(1fr) #sym.ast.triple #h(1fr) #sym.convolve*
+#sym.dash.em.three
+#h(3fr)
 
 #pagebreak()
 
