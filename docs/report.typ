@@ -256,6 +256,72 @@ What a _dilemma_!
 
 == The singularity dilemma
 
+$
+  arrow(a_i) =
+  G sum_(j = 0, j eq.not i)^n frac(m_j arrow(Delta r), norm(arrow(Delta r))^3)
+$
+
+When $arrow(Delta r) -> arrow(0)$:
+
+$
+  lim_(arrow(Delta r) -> arrow(0)) arrow(a_i)
+  &= G sum_(j = 0, j eq.not i)^n ( lim_(arrow(Delta r) -> arrow(0^+)) frac(m_j, norm(arrow(Delta r))^2) frac(arrow(Delta r), norm(arrow(Delta r))))
+  or G sum_(j = 0, j eq.not i)^n ( lim_(arrow(Delta r) -> arrow(0^-)) frac(m_j, norm(arrow(Delta r))^2) frac(arrow(Delta r), norm(arrow(Delta r)))) = \
+  &= G sum_(j = 0, j eq.not i)^n frac(plus.minus infinity arrow(Delta r), norm(arrow(Delta r))) \
+  plus.minus &= arrow(infinity)
+$
+
+I mean, you can imagine that because the closer two objects are to each other,
+the stronger the gravitational force is, there becomes a point that they are so
+close together that that force is infinitely big. I just can't fathom what
+happens to the direction of that vector in this case.
+
+So that's another problem I did not think of earlier. We should "cap" huge
+speeds, but do we just reuse the last trajectory?
+
+The project statement replaces $norm(arrow(Delta r))$ with
+$sqrt(norm(arrow(Delta r))^2 + epsilon^2)$. The logic is that there is always a
+_distance_ that $epsilon$ can "simulate" to be lesser than — but not $0$, as
+that would destroy the purpose of it — that makes this substitution always
+greater than $0$ and still be able to make $norm(arrow(Delta r))
+approx sqrt(norm(arrow(Delta r))^2 + epsilon^2)$ so that the acceleration
+calculated is close to reality, which only happens when $epsilon$ is way,
+way smaller than $norm(arrow(Delta r))$:
+
+$
+  because r := norm(arrow(Delta r)), r >= 0,
+  forall epsilon in RR, sqrt(r^2 + epsilon^2) = 0 <=> r = epsilon = 0 \
+  therefore forall zeta > 0,
+  exists delta = delta(zeta, r), delta > 0,
+  forall epsilon in RR,
+  0 < abs(epsilon) < delta -> abs(sqrt(r^2 + epsilon^2) - r) < zeta
+$
+
+Here, $delta$ represents the distance that $epsilon$ can't be greater than, and
+$delta$ depends on all the real distances between all objects $norm(
+  arrow(
+    Delta
+    r
+  )_i
+)$#footnote[The thing is that, distances between objects change, but I
+  don't know if $epsilon$ is supposed to change or just to be a constant from
+  the start to the end of the simulation.], but also on how much we want the
+gravitational force calculation to be close to reality, represented by $zeta$.
+So if we want $zeta$ accuracy/precision/tolerance in our physics, $therefore
+abs(epsilon) < delta(zeta, { x: norm(arrow(Delta r)_x) })$. The gravitational
+force stops being accurate to what would happen in reality once
+$norm(arrow(Delta r)) < abs(epsilon)$, which can only be an accurate value,
+again, only if $abs(epsilon)$ is way, way smaller than $norm(arrow(Delta r))$.
+
+Now we do not have the problem of dividing by $0$ anymore, but we have an idea
+of what the value of $epsilon$ is based on (we think), but still don't know how
+to exactly calculate it. It's about when we stop caring about the real physics
+that are being applied, but we don't know what number we would like it to be
+for each possible universe of objects and their states. We might just start by
+making it a static number $10^(−x), x >= 1$, just so it doesn't affect the
+calculations a lot but still prevents singularity, see what happens, and tweak
+it from there.
+
 #h(3fr)
 #sym.dash.em.three
 *#sym.convolve #h(1fr) #sym.ast.triple #h(1fr) #sym.convolve*
