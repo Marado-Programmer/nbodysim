@@ -49,3 +49,6 @@ formatter:
 ```console
 typstyle -i report.typ && typst c -f pdf report.typ
 ```
+
+[typst_docs]: <https://typst.app/docs/>
+[typst_bib]: <https://github.com/typst/hayagriva/blob/main/docs/file-format.md>

@@ -1,5 +1,5 @@
 /*
- *         nbodysim
+ *         nbodysim — n-body problem simulation with HPC
  *         Copyright (C) 2026  João Augusto Costa Branco Marado Torres
  *
  *         This program is free software: you can redistribute it and/or modify
@@ -285,7 +285,7 @@ $
   &= G sum_(j = 0, j eq.not i)^n ( lim_(arrow(Delta r) -> arrow(0^+)) frac(m_j, norm(arrow(Delta r))^2) frac(arrow(Delta r), norm(arrow(Delta r))))
   or G sum_(j = 0, j eq.not i)^n ( lim_(arrow(Delta r) -> arrow(0^-)) frac(m_j, norm(arrow(Delta r))^2) frac(arrow(Delta r), norm(arrow(Delta r)))) = \
   &= G sum_(j = 0, j eq.not i)^n frac(plus.minus infinity arrow(Delta r), norm(arrow(Delta r))) \
-  plus.minus &= arrow(infinity)
+  &= plus.minus arrow(infinity)
 $
 
 I mean, you can imagine that because the closer two objects are to each other,
@@ -330,7 +330,7 @@ force stops being accurate to what would happen in reality once
 $norm(arrow(Delta r)) < abs(epsilon)$, which can only be an accurate value,
 again, only if $abs(epsilon)$ is way, way smaller than $norm(arrow(Delta r))$.
 
-Now we do not have the problem of dividing by $0$ anymore, but we have an idea
+Now we do not have the problem of dividing by $0$ any more, but we have an idea
 of what the value of $epsilon$ is based on (we think), but still don't know how
 to exactly calculate it. It's about when we stop caring about the real physics
 that are being applied, but we don't know what number we would like it to be
