@@ -2,7 +2,7 @@
 authors = [{name = "João Augusto Costa Branco Marado Torres", email = "torres.dev@disroot.org"}]
 dependencies = []
 name = "nbodysim"
-requires-python = ">= 3.11"
+requires-python = ">= 3.12"
 description = "N-body simulation"
 readme = "README.md"
 license = "GPL-3.0-or-later"
@@ -27,6 +27,9 @@ Changelog = "https://github.com/Marado-Programmer/nbodysim/blob/master/CHANGELOG
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
+[tool.hatch.version]
+path = "src/nbodysim/__init__.py"
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64"]
@@ -35,6 +38,9 @@ platforms = ["linux-64"]
 nbodysim = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+i18n-extract = "./scripts/i18n.sh"
+fmt = "ruff"
+lint = "pylint"
 
 [tool.pixi.dependencies]
 numpy = ">=2.4.3,<3"

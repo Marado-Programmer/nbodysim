@@ -349,6 +349,28 @@ it from there.
 
 = Conclusion
 
+= Appendices
+
+== Dependencies and Modules discovery
+
+I'm not very familiar with the Python ecosystem.
+
+I already knew about creating a python virtual environment to then install the
+packages with `pip`, create the `requirements.txt`. But when I started
+searching what a common project structure for Python looks like, I learned
+about the `pyproject.toml` file standard. Then I don't know exactly how it came
+to be, but I ended up in
+#link("https://learn.scientific-python.org/")[Scientific Python] which
+introduced me to #link("https://pixi.prefix.dev/latest/")[Pixi] which I decided
+to try out.
+
+One website that I always come back to when I want to view the basics of a
+programming language, skill, etc., is #link("https://roadmap.sh/"). I went
+there to find what were the standard/builtin modules that Python provided and
+that could be important for me to know. Ended up in
+#link("https://docs.python.org/3/contents.html")[Python's complete
+  documentation].
+
 #lorem(67)
 
 #pagebreak()
