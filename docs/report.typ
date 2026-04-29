@@ -345,6 +345,39 @@ it from there.
 #sym.dash.em.three
 #h(3fr)
 
+= Implementation
+
+== Main loop
+
+I knew I wanted some sort of "professional game loop", something
+#link("https://github.com/Marado-Programmer/Bouncing-Object/blob/0e682130db579aeb0c11b43cb668ff93a7eaef52/src/com/marado/app/App.java#L107")[I had an idea on how to go about it].
+
+Still, I wanted to make something a little different from the usual. I wanted
+to maybe have multiple simulations running in parallel — threads allow that.
+
+I also wanted an API that resembles a media player, with `start`, `pause` and
+`stop` "buttons", "stepping forward" on a paused simulation (so we can control
+"how much time is passing"). We can pause a simulation and look at what is
+happening in it.
+
+Wasn't sure about what's the best way to go about managing the $Delta t$
+generation. The solution was on using the Strategy design pattern.
+
+So I implemented the `Loop` class, which also is an iterator and a
+context manager, so we can use it simply like this:
+
+```python
+with Loop(lambda: fixed_step(1/24)) as loop:
+    loop.skip_forward(3)
+    for dt in loop:
+        print(dt)
+```
+
+One decision I had to make is the choosing of the function of the `time` module
+that we would use to calculate the time differences. There were various
+options; `time.monotonic` seemed like the way to go. But I didn't look too much
+into it and still didn't have the opportunity to test different strategies.
+
 #pagebreak()
 
 = Conclusion
@@ -370,6 +403,20 @@ there to find what were the standard/builtin modules that Python provided and
 that could be important for me to know. Ended up in
 #link("https://docs.python.org/3/contents.html")[Python's complete
   documentation].
+
+=== Modules
+
+The module `threading` allows for parallelism using threads. It's used to allow
+multiple `Loop`s to run simultaneously, meaning that we can have multiple
+simulations running at the same time.
+
+We also get to use quite a lot the `threading.Event` class that allows as to
+control the `Loop` with a media player controllers-like API.
+
+We use a queue data structure for a FIFO way of storing the differences of
+time (implemented by the `queue` module).
+
+The `time` module lets us calculate the differences of time.
 
 #lorem(67)
 
