@@ -129,18 +129,8 @@ class Object:
 
         self.acceleration = np.zeros(self.dim)
 
-    def motion(self, /, dt: float, a: Vec | None = None) -> None:
-        self.position += self.velocity * dt + 1 / 2 * self.acceleration * dt**2
-
-        self.velocity += 1 / 2 * self.acceleration * dt
-
-        if a is not None:
-            self.acceleration = a
-
-        self.velocity += 1 / 2 * self.acceleration * dt
-
     def collides(self, pos: Vec) -> bool:
-        if not self._valid_sequence(pos):
+        if not self.valid_sequence(pos):
             raise ValueError(
                 _("`pos` has to have {dimensions} dimensions").format(
                     dimensions=self.dim
@@ -158,5 +148,5 @@ class Object:
 
         return acc <= self.radius**2
 
-    def _valid_sequence(self, seq: Vec, /) -> bool:
+    def valid_sequence(self, seq: Vec, /) -> bool:
         return self.dim == len(seq)

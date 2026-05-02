@@ -55,5 +55,5 @@ class TestObject(unittest.TestCase):
             Object(position=np.array([]), mass=1, velocity=np.array([]))
 
     def test_valid_sequence(self):
-        self.assertTrue(self.obj._valid_sequence(np.zeros(self.dim)))
-        self.assertFalse(self.obj._valid_sequence(np.zeros(self.dim + 1)))
+        self.assertTrue(self.obj.valid_sequence(np.zeros(self.dim)))
+        self.assertFalse(self.obj.valid_sequence(np.zeros(self.dim + 1)))
