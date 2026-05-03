@@ -20,9 +20,11 @@
 
 = Introduction
 
-#lorem(420)
+The $n$-body problem studies how multiple objects move under mutual gravitational interaction. Despite its simple formulation, its behavior quickly becomes complex due to the quadratic number of pairwise interactions, making it computationally expensive for large systems.
 
-#pagebreak()
+This project aims to implement an efficient simulation of the $n$-body problem using classical numerical integration methods, specifically Velocity Verlet, and to explore performance optimizations through vectorization with NumPy and parallel computation using CUDA. In addition to the physical model, the project also focuses on software design aspects such as modular backends, controllable simulation loops, and reproducible environments.
+
+The goal is to balance physical plausibility, numerical stability, and computational performance while maintaining a flexible architecture for future extensions.
 
 = Physics
 
@@ -432,7 +434,7 @@ A solution is to simply save all initial positions (actually the current
 objects state) in an array like `python objects = [o for o, _ in env.objects]`,
 and use that specifically for calculations.
 
-== NumPy
+=== NumPy
 
 Finnally, I learned how to actually use the `numpy` module, not just to store
 values. I started by
@@ -484,7 +486,7 @@ diff = r[np.newaxis, :, :] - r[:, np.newaxis, :]
 I tried commenting this part of the code so it becomes easier to understand
 what is happening.
 
-== CUDA
+=== CUDA
 
 Using the example code given by the project statement, I did figure out what to
 do in the CUDA kernel pretty easy. But I got a little stuck on how exactly to
@@ -494,9 +496,48 @@ versa_. Generative AI did guide me:
 - I need to `raven`/flatten the arrays so that CUDA can read them with copy;
 - `float32` is way faster than `float64`,
 
-#pagebreak()
+== Simulate
+
+With all this components made, I just have to make them work together. I
+created the `Simulator` class that works with both the `Loop` and `Backend` at
+the same time — passing the `Loop`s generated differences of time to the
+`Backend` to use it to update our environment `Env`.
+
+I also did a way to create an `Env` randomly. But I don't think I'm doing that
+right. The initial values don't seem to be good for the size of our
+simulations.
+
+At first, objects had an initial velocity, but the objects were actually
+getting apart from each other. My idea is that the mass is to small to create
+gravitational force, because I mean, it's multiplied by the big $G$. Then I
+jumped to make all initial velocities equal to zero to see what happens, and
+it's like the objects are not moving at all. But accelerations existed — I
+checked. They are just really tiny accelerations. That's really why me and
+you, human reader with a similar weight as me, don't go towards each other even
+if we are very close together.
+
+== CLI
+
+To create a simulation, I decided to create an CLI that let's use give some
+parameters on how we want the simulation to go from the 3 parts: Selection of
+`Loop` strategy and Backend, and how to create the initial environment.
+
+== Matplotlib
+
+As I said, some sections above, I was able to visualize that our initial data
+is pretty bad, but that wasn't only by using `python print()` statements. For
+now, we did a 2 dimensions scatter to visualize our environment being
+simulated.
 
 = Conclusion
+
+You can check out https://github.com/Marado-Programmer/nbodysim for the Git repository!
+
+This project explored the implementation of an $n$-body simulation using both
+CPU and GPU approaches, focusing on numerical stability, performance, and
+parallel execution. While the physics model is conceptually simple, achieving
+stable and realistic behavior required careful attention to integration
+methods, parameter scaling, and computational structure.
 
 = Appendices
 
@@ -534,8 +575,7 @@ time (implemented by the `queue` module).
 
 The `time` module lets us calculate the differences of time.
 
-#lorem(67)
-
-#pagebreak()
+Between `argparse` and `optparse`, the first seemed the faster to use and
+create an CLI.
 
 #bibliography("bibliography.yaml")
