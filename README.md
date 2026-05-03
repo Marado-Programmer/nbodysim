@@ -43,7 +43,6 @@ Then run `main` with `python src/nbodysim/__main__.py`, or:
 pip install -e .
 python -m nbodysim --backend cpu --mode fixed
 ```
-```
 
 # Tests
 
