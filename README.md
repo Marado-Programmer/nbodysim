@@ -30,6 +30,21 @@ pixi run cli -- --seed 42
 pixi run cli -- -n 1000 --backend cpu
 ```
 
+## Run without Pixi
+
+```
+python -m venv .venv
+source .venv/bin/activate
+pip install numpy matplotlib # pycuda optional, needs cuda-toolkit, nvcc, etc. installed before pycuda
+```
+Then run `main` with `python src/nbodysim/__main__.py`, or:
+
+```
+pip install -e .
+python -m nbodysim --backend cpu --mode fixed
+```
+```
+
 # Tests
 
 ```console
@@ -110,3 +125,12 @@ When in need of string templating, we use this approach:
 ```python
 _("calculated mass: {mass} kg").format(mass=locale.format_string("%.2e", mass))
 ```
+
+# Resources
+
+https://documen.tician.de/pycuda/
+https://github.com/ArchaeaSoftware/cudahandbook
+https://docs.nvidia.com/cuda/cuda-programming-guide/
+https://darkhelmet.github.io/cheats/gpu/cuda/
+https://web.engr.oregonstate.edu/~mjb/cs575/CUDAQuickReference.pdf
+https://intro-to-cuda.readthedocs.io/en/latest/index.html
