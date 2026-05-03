@@ -378,6 +378,110 @@ that we would use to calculate the time differences. There were various
 options; `time.monotonic` seemed like the way to go. But I didn't look too much
 into it and still didn't have the opportunity to test different strategies.
 
+== Velocity Verlet
+
+I tried to understand why we do it that way by reading the
+#link("https://en.wikipedia.org/wiki/Verlet_integration#Velocity_Verlet")[Wikipedia
+  page], but I didn't exactly. So I just tried to implement it by looking at
+the project statement.
+
+My first implementation was a translation to code to what I was seeing:
+
+```python
+from nbodysim.object import Object, Vec
+from . import Backend, Env
+from nbodysim import G
+import numpy as np
+
+def step(self, dt: float, env: Env) -> Env:
+  updated = []
+
+  for i in range(len(env.objects)):
+    x, a = env.objects[i]
+
+    x.position += x.velocity * dt + (1 / 2) * a * dt**2
+    x.velocity += (1 / 2) * a * dt
+
+    def accelaration(y: Object) -> Vec:
+      diff = y.position - x.position
+      return (y.mass * diff) / ( (np.linalg.norm(diff) ** 2 + env.epsilon**2) ** (3 / 2) )
+
+    a = np.zeros_like(x.position)
+    for j, (y, _) in enumerate(env.objects):
+      if j == i:
+        continue
+
+      a += accelaration(y)
+    a *= G
+
+    x.velocity += (1 / 2) * a * dt
+
+    updated.append((x, a))
+
+  env.objects = updated
+  return env
+```
+
+Then I noticed that, by not updating all positions and velocities all at once
+(right now we are doing one by one with the iterator), it's like it actually
+passed $n * Delta t$ time, and only one object updates for each $Delta t$,
+already influencing the others' acceleration. They should update all at the same
+time.
+
+A solution is to simply save all initial positions (actually the current
+objects state) in an array like `python objects = [o for o, _ in env.objects]`,
+and use that specifically for calculations.
+
+Finnally, I learned how to actually use the `numpy` module, not just to store
+values. I started by
+#link("https://numpy.org/doc/stable/user/quickstart.html")[reading] the
+#link("https://numpy.org/doc/stable/user/absolute_beginners.html")[documentation].
+
+After that, I still didn't understand how should I be using it in this
+situation about the acceleration. My idea was that I was not supposed to be
+using loops for the calculations.
+
+```python
+def step(self, dt: float, env: Env) -> Env:
+    objs = [obj for obj, _ in env.objects]
+    a = np.array([a for _, a in env.objects])
+
+    r = np.stack([o.position for o in objs])
+    v = np.stack([o.velocity for o in objs])
+    m = np.array([o.mass for o in objs])
+
+    r += v * dt + (1 / 2) * a * dt**2
+    v += (1 / 2) * a * dt
+
+    # TODO: calculate accelaration
+    # a = G * ...
+
+    v += (1 / 2) * a * dt
+
+    for i, o in enumerate(objs):
+        o.position = r[i]
+        o.velocity = v[i]
+
+    env.objects = list(zip(objs, a))
+    return env
+```
+
+With the help of generative AI, I found out how to go about it using matrix
+multiplication and manipulation, specially by increasing the dimensions of
+certain arrays/matrixes.
+
+Were is an example, where we take a `[N, dim]` array of vectors of the position
+(`N` is the number of objects and `dim` the dimensions the simulation will be
+working on) and create a `[N, N, dim]` where each position is the difference of
+the positions of two objects:
+
+```python
+diff = r[np.newaxis, :, :] - r[:, np.newaxis, :]
+```
+
+I tried commenting this part of the code so it becomes easier to understand
+what is happening.
+
 #pagebreak()
 
 = Conclusion
