@@ -127,9 +127,9 @@ _("calculated mass: {mass} kg").format(mass=locale.format_string("%.2e", mass))
 
 # Resources
 
-https://documen.tician.de/pycuda/
-https://github.com/ArchaeaSoftware/cudahandbook
-https://docs.nvidia.com/cuda/cuda-programming-guide/
-https://darkhelmet.github.io/cheats/gpu/cuda/
-https://web.engr.oregonstate.edu/~mjb/cs575/CUDAQuickReference.pdf
-https://intro-to-cuda.readthedocs.io/en/latest/index.html
+- https://documen.tician.de/pycuda/
+- https://github.com/ArchaeaSoftware/cudahandbook
+- https://docs.nvidia.com/cuda/cuda-programming-guide/
+- https://darkhelmet.github.io/cheats/gpu/cuda/
+- https://web.engr.oregonstate.edu/~mjb/cs575/CUDAQuickReference.pdf
+- https://intro-to-cuda.readthedocs.io/en/latest/index.html
