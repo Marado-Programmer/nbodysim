@@ -13,16 +13,16 @@
 #
 #        You should have received a copy of the GNU General Public License
 #        along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import pycuda.autoinit
-import pycuda.driver as cuda
+from nbodysim.env import Env
 import numpy as np
-from pycuda.compiler import SourceModule
-from . import Backend, Env
+from . import Backend
 from nbodysim import G
 
 
 class GPUBackend(Backend):
     def __init__(self):
+        from pycuda.compiler import SourceModule
+
         with open("../kernels/kernel.cu") as f:
             self.mod = SourceModule(f.read())
 
@@ -31,6 +31,8 @@ class GPUBackend(Backend):
         self.post = self.mod.get_function("post_update")
 
     def step(self, dt: float, env: Env) -> Env:
+        import pycuda.driver as cuda
+
         threads = 1 << 8
 
         objs = [obj for obj, _ in env.objects]
@@ -105,3 +107,14 @@ class GPUBackend(Backend):
 
         env.objects = list(zip(objs, a))
         return env
+
+
+def cuda_available():
+    try:
+        import pycuda.autoinit
+        import pycuda.driver as cuda
+
+        cuda.init()
+        return cuda.Device.count() > 0
+    except Exception:
+        return False

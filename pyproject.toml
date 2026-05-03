@@ -41,11 +41,12 @@ nbodysim = { path = ".", editable = true }
 i18n-extract = "./scripts/i18n.sh"
 fmt = "ruff"
 lint = "pylint"
+cli = "python src/nbodysim/__main__.py"
 
 [tool.pixi.dependencies]
 numpy = ">=2.4.3,<3"
 pycuda = ">=2025.1.2,<2026"
-matplotlib = ">=3.10.8,<4"
+matplotlib = ">=3.10.9,<4"
 
 [tool.pixi.environments]
 default = { solve-group = "default" }

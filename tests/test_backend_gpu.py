@@ -18,17 +18,8 @@ import numpy as np
 
 from nbodysim.backend.cpu import CPUBackend
 from nbodysim.backend import Env
+from nbodysim.backend.gpu import cuda_available
 from nbodysim.object import Object
-
-
-def cuda_available():
-    try:
-        import pycuda.driver as cuda
-
-        cuda.init()
-        return cuda.Device.count() > 0
-    except Exception:
-        return False
 
 
 @unittest.skipUnless(cuda_available(), "CUDA not available")
@@ -50,6 +41,7 @@ class TestGPUBackend(unittest.TestCase):
 
     def test_gpu_matches_cpu(self):
         from nbodysim.backend.gpu import GPUBackend
+
         env_cpu = self.make_env()
         env_gpu = self.make_env()
 
@@ -72,6 +64,7 @@ class TestGPUBackend(unittest.TestCase):
 
     def test_multiple_steps_consistency(self):
         from nbodysim.backend.gpu import GPUBackend
+
         env_cpu = self.make_env()
         env_gpu = self.make_env()
 

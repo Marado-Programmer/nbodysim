@@ -10,6 +10,26 @@ Python
 
 C/C++
 
+## Usage
+
+```console
+# CPU, fixed timestep
+pixi run cli -- --backend cpu --mode fixed --dt 0.01
+python -m nbodysim --backend cpu --mode fixed --dt 0.01
+
+# GPU (if available)
+pixi run cli -- --backend gpu
+
+# real-time variable stepping
+pixi run cli -- --mode variable --hz 60
+
+# reproducible run
+pixi run cli -- --seed 42
+
+# stress test
+pixi run cli -- -n 1000 --backend cpu
+```
+
 # Tests
 
 ```console

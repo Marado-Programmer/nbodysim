@@ -138,7 +138,7 @@ class Loop(Iterator):
         self.__stop_state.set()
         self.__play_state.set()
 
-    def skip_forward(self, n: Annotated[int, "normal"]) -> None:
+    def skip_forward(self, n: Annotated[int, "normal"], /) -> None:
         """Use to generate exactly more `n` differences of time.
 
         Parameters
