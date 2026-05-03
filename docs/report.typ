@@ -432,6 +432,8 @@ A solution is to simply save all initial positions (actually the current
 objects state) in an array like `python objects = [o for o, _ in env.objects]`,
 and use that specifically for calculations.
 
+== NumPy
+
 Finnally, I learned how to actually use the `numpy` module, not just to store
 values. I started by
 #link("https://numpy.org/doc/stable/user/quickstart.html")[reading] the
@@ -481,6 +483,16 @@ diff = r[np.newaxis, :, :] - r[:, np.newaxis, :]
 
 I tried commenting this part of the code so it becomes easier to understand
 what is happening.
+
+== CUDA
+
+Using the example code given by the project statement, I did figure out what to
+do in the CUDA kernel pretty easy. But I got a little stuck on how exactly to
+use PyCuda now, specially on how to pass, my data, from host to device _et vice
+versa_. Generative AI did guide me:
+
+- I need to `raven`/flatten the arrays so that CUDA can read them with copy;
+- `float32` is way faster than `float64`,
 
 #pagebreak()
 
