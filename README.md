@@ -1,6 +1,6 @@
 # _N_-body simulation
 
-School project. Applying physics (Newton's classical mechanics, laws of motion, and his law of universal gravitation) to simulate (with visualization) the "n-body problem" on both the CPU and on the GPU (using CUDA)
+School project. Applying physics (Newton's classical mechanics, laws of motion, and his law of universal gravitation) to simulate (with visualization) the "n-body problem" on both the CPU and on the GPU (using CUDA).
 
 ## Usage
 
